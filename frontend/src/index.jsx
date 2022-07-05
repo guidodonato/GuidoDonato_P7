@@ -18,6 +18,7 @@ import {
 import { ErrorPage } from './components/Error'
 import Addpost from './pages/Addpost'
 
+
 ReactDOM.render(
     <React.StrictMode>
         <Router>

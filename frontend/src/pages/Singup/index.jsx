@@ -50,6 +50,9 @@ function Singup() {
 			console.log(err);
 		}
 	}
+	useEffect(() => {
+		document.title = 'Singup'
+	},[])
 
 	async function fetchLogin() {
 		fetch("http://localhost:4000/api/auth/login", {

@@ -34,6 +34,10 @@ function Myfavorites() {
 	const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
 	const [isloading, setIsloading] = useState(false);
 	const [empty, setEmpty] = useState(false);
+	useEffect(() => {
+		document.title = "Mes favoris";
+	}, []);
+
 	async function fetchposts() {
 		await fetch("http://localhost:4000/api/posts", {
 			headers: new Headers({

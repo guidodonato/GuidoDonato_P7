@@ -328,7 +328,12 @@ export const UploaderImg = styled.img`
     width: 100%;
     height: 90%;
 `
-
+export const UpdateloaderImg = styled.img`
+    width: 50%;
+    height: 50%;
+    position: relative;
+    z-index: -1;
+`
 //style Component Posts pages///
 
 export const DivPostpage = styled.div`

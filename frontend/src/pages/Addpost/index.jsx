@@ -25,6 +25,7 @@ function UploadImagUrl({ imagenUrl, handleUploadimg }) {
                 <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
                 <span>Upload image</span>
                 <BtnUploadImg
+                    required
                     type="file"
                     accept="image/*"
                     name="imagen"
@@ -44,7 +45,9 @@ function Addpost() {
     const [comments, setComments] = useState()
     const navigate = useNavigate()
     const formdata = new FormData()
-
+    useEffect(() => {
+		document.title = 'Addposts'
+	},[])
     async function handleUploadimg(e) {
         setFile(e.target.files[0])
 

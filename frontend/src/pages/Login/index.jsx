@@ -25,7 +25,9 @@ function Login() {
     })
 
     const navigate = useNavigate()
-
+    useEffect(() => {
+      document.title = 'Login'
+  },[])
     async function fetchLogin() {
         fetch('http://localhost:4000/api/auth/login', {
             method: 'POST',
