@@ -20,9 +20,9 @@ import { Loader } from '../../components/Loading/index'
 import { EmptyData } from '../../components/Error'
 function Mycomments() {
     const navigate = useNavigate()
-    const { usertoken, islogged, userID } = useContext(AuthContext)
+    const { usertoken, userID, islogged } = useContext(AuthContext)
     const [posts, setPosts] = useState([])
-    const [postsACT, setPostsAct] = useState([])
+    const [postsACT, setPostsAct] = useState(false)
     const { setDposts, Dposts } = useContext(DeleteContext)
     const { setLikedposts, likedposts } = useContext(LikedContext)
     const [next, setNext] = useState(posts.slice(0, 3))
@@ -51,16 +51,19 @@ function Mycomments() {
         setPostsAct(true)
         setIsloading(false)
     }
-
+    
+    
     useEffect(() => {
         setIsloading(true)
-        islogged ? fetchposts() : navigate('/')
+        console.log(posts)
+         islogged ? fetchposts() :// navigate('/')
         console.log(islogged)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [islogged])
 
     useEffect(() => {
+        console.log(userID)
         if (postsACT) {
             setNext(
                 posts

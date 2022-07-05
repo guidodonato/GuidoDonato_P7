@@ -1,7 +1,7 @@
 /** @format */
 
 import { useMediaQuery } from "react-responsive";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../utils/context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
@@ -14,10 +14,21 @@ import {
 } from "../../utils/style/Grupomania";
 
 export default function Settigpost({ user, handleSetting, handleDelete }) {
-	const { userID, Roles } = useContext(AuthContext);
+	const { userID } = useContext(AuthContext);
+	const [Roles , Setroles] = useState(localStorage.getItem("Roles"))
+	const [roles, setRoles] = useState()
 	const ismobile = useMediaQuery({ maxWidth: 767 });
+	useEffect(() => {
+		if (Roles === 'true') {
+			setRoles(true)
+		}
+		if (!Roles === 'true') {
+			setRoles(false)
+		} 
+		 
+	 },[Roles])
 	//function pour afficher les boutons de mise à jour et de suppression //
-	if (user === userID || Roles) {
+	if (user === userID || roles ) {
 		return ismobile ? (
 			<MDivBtnUpdate>
 				<div>
@@ -50,5 +61,6 @@ export default function Settigpost({ user, handleSetting, handleDelete }) {
 			</DivBtnUpdate>
 		);
 	}
+
 	return null;
 }

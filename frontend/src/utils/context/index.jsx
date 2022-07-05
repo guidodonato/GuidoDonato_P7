@@ -4,12 +4,12 @@ import { useState, createContext } from "react";
 
 export const AuthContext = createContext({});
 export const AuthContextProvider = (props) => {
-	const [islogged, setIslogged] = useState(false);
-	const [name, setName] = useState({});
-	const [usertoken, setUsertoken] = useState("");
-	const [userID, setUserID] = useState("");
-	const [Roles, setRoles] = useState("");
-
+	const [islogged, setIslogged] = useState({});
+	const [name, setName] = useState(localStorage.getItem("Name"));
+	const [usertoken, setUsertoken] = useState(localStorage.getItem("token"));
+	const [userID, setUserID] = useState(localStorage.getItem("userID"));
+	const [Roles, setRoles] = useState(localStorage.getItem("Roles"));
+	
 	return (
 		<AuthContext.Provider
 			value={{

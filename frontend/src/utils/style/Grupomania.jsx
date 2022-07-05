@@ -329,10 +329,12 @@ export const UploaderImg = styled.img`
     height: 90%;
 `
 export const UpdateloaderImg = styled.img`
-    width: 50%;
+    width: 100px;
     height: 50%;
     position: relative;
     z-index: -1;
+    object-fit: contain;
+
 `
 //style Component Posts pages///
 

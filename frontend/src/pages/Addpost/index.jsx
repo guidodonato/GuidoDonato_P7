@@ -46,7 +46,8 @@ function Addpost() {
     const navigate = useNavigate()
     const formdata = new FormData()
     useEffect(() => {
-		document.title = 'Addposts'
+        document.title = 'Addposts'
+        console.log(name)
 	},[])
     async function handleUploadimg(e) {
         setFile(e.target.files[0])
@@ -102,15 +103,15 @@ function Addpost() {
     }, [postsed, imagenUrl])
 
     useEffect(() => {
-        if (islogged) {
+        if (usertoken) {
             console.log(islogged)
         } else {
             alert('no autorizado')
-            navigate('/')
+            //navigate('/')
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [islogged])
+    }, [usertoken])
 
     return ismobile ? (
         <MDivUpload>

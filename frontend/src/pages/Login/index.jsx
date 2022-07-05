@@ -18,6 +18,7 @@ function Login() {
     const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 })
     const [Error, setError] = useState(null)
     const AuthCtx = useContext(AuthContext)
+    const {userID, Roles} = useContext(AuthContext)
     let [jwt, setJwt] = useState()
     const [user, setUser] = useState({
         email: '',
@@ -41,11 +42,11 @@ function Login() {
             .then((data) => {
                 setJwt(data.token)
                 AuthCtx.setUserID(data.userId)
-                AuthCtx.setRoles(data.roles)
-                console.log(data)
+                localStorage.setItem("Roles",data.roles)
                 setError(data.error)
             })
             .catch((err) => console.log(err))
+            
     }
 
     function handleonChange(e) {
@@ -59,16 +60,15 @@ function Login() {
     async function handleSubmit(e) {
         e.preventDefault()
         fetchLogin()
-
         console.log(user)
     }
 
     useEffect(() => {
         if (jwt) {
+            localStorage.setItem("token", jwt)
+            AuthCtx.setUsertoken(localStorage.getItem("token", jwt))
             AuthCtx.setIslogged(true)
-            AuthCtx.setUsertoken(jwt)
             AuthCtx.setName(user.email)
-
             console.log(AuthCtx)
         }
         if (jwt) {

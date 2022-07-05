@@ -22,6 +22,7 @@ function Singup() {
 	const { usertoken, setUsertoken } = useContext(AuthContext);
 	const isMobile = useMediaQuery({ maxWidth: 767 });
 	const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
+
 	const [user, setUser] = useState({
 		email: "",
 		password: "",
@@ -70,6 +71,7 @@ function Singup() {
 				AuthCtx.setRoles(data.roles);
 			})
 			.catch((err) => console.log(err));
+		
 	}
 	async function handleonChange(e) {
 		e.preventDefault();
@@ -87,8 +89,10 @@ function Singup() {
 
 		console.log(user);
 	}
-	useEffect(() => {
-		usertoken ? AuthCtx.setIslogged(true) : console.log("error");
+
+
+	useEffect(() => {	
+		usertoken ? localStorage.setItem("token", usertoken) : console.log('error');
 		if (usertoken) {
 			navigate("/posts");
 		} else {
