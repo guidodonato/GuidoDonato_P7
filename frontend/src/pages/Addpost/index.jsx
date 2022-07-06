@@ -21,7 +21,7 @@ function UploadImagUrl({ imagenUrl, handleUploadimg }) {
         return <UploaderImg src={imagenUrl} alt="gruopomania" />
     } else {
         return (
-            <UploadLabel>
+            <UploadLabel aria-hidden="true">
                 <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
                 <span>Upload image</span>
                 <BtnUploadImg
@@ -78,7 +78,7 @@ function Addpost() {
         fetch('http://localhost:4000/api/posts', {
             method: 'POST',
             headers: {
-                Authorization: `beare ${usertoken}`,
+                Authorization: `bearer ${usertoken}`,
             },
             body: formdata,
         })
@@ -114,8 +114,8 @@ function Addpost() {
     }, [usertoken])
 
     return ismobile ? (
-        <MDivUpload>
-            <FormUpload onSubmit={handleSubmit}>
+        <MDivUpload >
+            <FormUpload onSubmit={handleSubmit} >
                 <DivUploadimg>
                     <UploadImagUrl
                         imagenUrl={imagenUrl}
@@ -123,7 +123,8 @@ function Addpost() {
                         required
                     />
                 </DivUploadimg>
-
+               
+                    
                 <CommentsText
                     name="comments"
                     required

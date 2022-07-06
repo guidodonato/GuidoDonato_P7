@@ -16,7 +16,7 @@ import { ErrorMulti } from "../../components/Error";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
-function Singup() {
+function Signup() {
 	const AuthCtx = useContext(AuthContext);
 	const [Error, setError] = useState(null);
 	const { usertoken, setUsertoken } = useContext(AuthContext);
@@ -52,8 +52,8 @@ function Singup() {
 		}
 	}
 	useEffect(() => {
-		document.title = 'Singup'
-	},[])
+		document.title = "Singup";
+	}, []);
 
 	async function fetchLogin() {
 		fetch("http://localhost:4000/api/auth/login", {
@@ -71,7 +71,6 @@ function Singup() {
 				AuthCtx.setRoles(data.roles);
 			})
 			.catch((err) => console.log(err));
-		
 	}
 	async function handleonChange(e) {
 		e.preventDefault();
@@ -90,9 +89,8 @@ function Singup() {
 		console.log(user);
 	}
 
-
-	useEffect(() => {	
-		usertoken ? localStorage.setItem("token", usertoken) : console.log('error');
+	useEffect(() => {
+		usertoken ? localStorage.setItem("token", usertoken) : console.log("error");
 		if (usertoken) {
 			navigate("/posts");
 		} else {
@@ -169,7 +167,7 @@ function Singup() {
 							/>
 						</label>
 						<br />
-						<BtnSubmit type='submit' value='Singup' />
+						<BtnSubmit type='submit' value='Signup' />
 					</FormSingup>
 				</TDivLogin>
 			</div>
@@ -203,11 +201,11 @@ function Singup() {
 						/>
 					</label>
 					<br />
-					<BtnSubmit type='submit' value='Singup' />
+					<BtnSubmit type='submit' value='Signup' />
 				</FormSingup>
 			</DivLogin>
 		</div>
 	);
 }
 
-export default Singup;
+export default Signup;

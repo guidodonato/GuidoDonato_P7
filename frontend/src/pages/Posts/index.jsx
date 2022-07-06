@@ -47,7 +47,7 @@ function Post() {
 	async function fetchposts() {
 		await fetch("http://localhost:4000/api/posts", {
 			headers: new Headers({
-				Authorization: `beare ${usertoken}`,
+				Authorization: `bearer ${usertoken}`,
 			}),
 		})
 			.then((res) => res.json())

@@ -9,6 +9,7 @@ import {
     BtnSubmit,
     MDivLogin,
     TDivLogin,
+    StyledLinksignup
 } from '../../utils/style/Grupomania'
 import Logo from '../../assets/logo.svg'
 import { AuthContext } from '../../utils/context'
@@ -198,8 +199,8 @@ function Login() {
 
                     <BtnSubmit type="submit" value="Login" />
                     <p>
-                        {' '}
-                        No tienes cuenta? <Link to={'/singup'}>Singup</Link>
+                        
+                    Vous avez déjà un compte ?  <StyledLinksignup to={'/Signup'}>Signup</StyledLinksignup>
                     </p>
                 </FormLogin>
             </DivLogin>

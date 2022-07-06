@@ -45,8 +45,8 @@ function Header() {
 					<MImgLogo src={Logo} alt='groupmania' />
 				</MStyleLogo>
 				<MNavLink>
-					<MStyledLink hidden={islogged} to='/Singup' $isFullLink>
-						Singup
+					<MStyledLink hidden={islogged} to='/Signup' $isFullLink>
+						Signup
 					</MStyledLink>
 					<MStyledLink hidden={islogged} to='/Login' $isFullLink>
 						Login

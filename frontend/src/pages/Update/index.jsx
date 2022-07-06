@@ -13,13 +13,13 @@ import {
 	MDivUpload,
 	UploadLabel,
 	UploaderImg,
-	UpdateloaderImg
+	UpdateloaderImg,
 } from "../../utils/style/Grupomania";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-function UploadImagUrl({ imagenUrl, handleUploadimg}) {
+function UploadImagUrl({ imagenUrl, handleUploadimg }) {
 	if (!imagenUrl) {
 		return <UploaderImg src={imagenUrl} alt='gruopomania' />;
 	} else {
@@ -29,7 +29,6 @@ function UploadImagUrl({ imagenUrl, handleUploadimg}) {
 					<FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
 					<span>Upload image</span>
 					<BtnUploadImg
-						
 						type='file'
 						accept='image/*'
 						name='imagen'
@@ -40,14 +39,14 @@ function UploadImagUrl({ imagenUrl, handleUploadimg}) {
 			</div>
 		);
 	}
-	}
+}
 
 function Updatepost() {
 	const ismobile = useMediaQuery({ maxWidth: 767 });
 	const { name, userID, usertoken, islogged } = useContext(AuthContext);
 	const { idposts } = useContext(UpdateContext);
 	const [postsed, setIsposted] = useState(false);
-    const [allpost, setAllpost]  = useState({})
+	const [allpost, setAllpost] = useState({});
 	const [imagenUrl, setImagenUrl] = useState(null);
 	const [file, setFile] = useState();
 	const [comments, setComments] = useState();
@@ -61,10 +60,9 @@ function Updatepost() {
 
 	async function handleUploadimg(e) {
 		setFile(e.target.files[0]);
-        
+
 		console.log({ imagenUrl });
 	}
-
 
 	useEffect(() => {
 		if (file) {
@@ -90,28 +88,25 @@ function Updatepost() {
 		} else {
 			formdata.append("imageUrl", allpost.imageUrl);
 		}
-		
-		
+
 		fetchUpdateposts();
 	}
 	async function fetchonepots() {
 		fetch(`http://localhost:4000/api/posts/${idposts}`, {
 			headers: {
 				Authorization: `bearer ${usertoken}`,
-			}
+			},
 		})
 			.then((res) => res.json())
 
 			.then((data) => {
 				console.log(data);
 				setAllpost(data);
-				setImagenUrl(data.imageUrl)
+				setImagenUrl(data.imageUrl);
 			})
 			.catch((err) => console.log(err));
-		
 	}
-		
-	
+
 	async function fetchUpdateposts() {
 		fetch(`http://localhost:4000/api/posts/${idposts}`, {
 			method: "PUT",
@@ -125,16 +120,12 @@ function Updatepost() {
 			.then((data) => {
 				console.log(data);
 				setIsposted(true);
-				
 			})
 			.catch((err) => console.log(err));
 		setFile(null);
-		
-		
 	}
 
 	useEffect(() => {
-	
 		if (postsed) {
 			setFile(null);
 			navigate("/Posts");
@@ -157,11 +148,9 @@ function Updatepost() {
 		<MDivUpload>
 			<FormUpload onSubmit={handleSubmit}>
 				<DivUploadimg>
-					
 					<UploadImagUrl
 						imageUrl={allpost.imageUrl}
 						handleUploadimg={handleUploadimg}
-						
 					/>
 				</DivUploadimg>
 
@@ -178,12 +167,10 @@ function Updatepost() {
 	) : (
 		<DivUpload>
 			<FormUpload onSubmit={handleSubmit}>
-					<DivUploadimg>
-					
+				<DivUploadimg>
 					<UploadImagUrl
 						imagenUrl={imagenUrl}
 						handleUploadimg={handleUploadimg}
-						
 					/>
 				</DivUploadimg>
 

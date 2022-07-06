@@ -107,7 +107,7 @@ export const BtnDashboard = styled.input`
     font-weight: 600;
     cursor: pointer;
     text-align: center;
-    color: ${colors.primary};
+    color:#444cef;
     &:hover {
         color: #444cef;
     }
@@ -149,7 +149,15 @@ export const StyledLink = styled(Link)`
     font-size: 18px;
     ${(props) =>
         props.$isFullLink &&
-        `color: ${colors.primary}; border-radius: 30px; background-color: ${colors.secondary};`}
+        `color: blue; border-radius: 30px; background-color: ${colors.secondary};`}
+`
+export const StyledLinksignup = styled(Link)`
+    padding: 6px;
+    color: blue;
+    text-decoration: none;
+    font-size: 14px;
+     border-radius:30px;
+     background-color: ${colors.secondary};
 `
 
 export const MBanner = styled.div`
@@ -187,7 +195,7 @@ export const MStyledLink = styled(Link)`
     font-size: 14px;
     ${(props) =>
         props.$isFullLink &&
-        `color: ${colors.primary}; border-radius: 30px; background-color: ${colors.secondary};`}
+        `color: blue; border-radius: 30px; background-color: ${colors.secondary};`}
 `
 
 /// style Component Avatar ///
@@ -228,7 +236,7 @@ export const DivBtnUpdate = styled.div`
 export const BtnSettingDelete = styled.input`
     display: none;
 `
-export const LabelBtnsetting = styled.label`
+export const LabelBtnsetting = styled.form`
     cursor: pointer;
 `
 
@@ -313,7 +321,7 @@ export const UploadLabel = styled.label`
     align-items: center;
     padding: 1.5rem 1rem;
     background-color: #fff;
-    color: ${colors.primary};
+    color: blue;
     border-radius: 0.5rem;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11),
         0 5px 15px 0 rgba(0, 0, 0, 0.08);
@@ -363,7 +371,7 @@ export const BtnInput = styled.input`
     cursor: pointer;
     font-size: 1rem;
     background-color: ${colors.secondary};
-    color: ${colors.primary};
+    color: blue;
     padding: 0.5rem 1rem;
     border-color: ${colors.secondary};
     border-radius: 0.25rem;
@@ -483,7 +491,7 @@ export const DivcontainerLike = styled.div`
 export const Btnlike = styled.input`
     display: none;
 `
-export const LikeLabel = styled.label`
+export const LikeLabel = styled.form`
     width: 15px;
     color: red;
     cursor: pointer;

@@ -33,13 +33,13 @@ export default function Settigpost({ user, handleSetting, handleDelete }) {
 			<MDivBtnUpdate>
 				<div>
 					<LabelBtnsetting onClick={handleSetting} For='edit'>
-						<BtnSettingDelete type='button' name='edit' />
+						<BtnSettingDelete type='button' name='edit' aria-label="update de post"/>
 						<FontAwesomeIcon icon={faGear} />
 					</LabelBtnsetting>
 				</div>
 				<div>
 					<LabelBtnsetting onClick={handleDelete} For='delete'>
-						<BtnSettingDelete type='button' name='delete' />
+						<BtnSettingDelete type='button' name='delete' aria-label="delete de post"/>
 						<FontAwesomeIcon icon={faTrashCan} />
 					</LabelBtnsetting>
 				</div>
@@ -48,13 +48,13 @@ export default function Settigpost({ user, handleSetting, handleDelete }) {
 			<DivBtnUpdate>
 				<div>
 					<LabelBtnsetting onClick={handleSetting} For='edit'>
-						<BtnSettingDelete type='button' name='edit' />
+						<BtnSettingDelete type='button' name='edit'  aria-label="update de post"/>
 						<FontAwesomeIcon icon={faGear} />
 					</LabelBtnsetting>
 				</div>
 				<div>
 					<LabelBtnsetting onClick={handleDelete} For='delete'>
-						<BtnSettingDelete type='button' name='delete' />
+						<BtnSettingDelete type='button' name='delete' aria-label="delete de post" />
 						<FontAwesomeIcon icon={faTrashCan} />
 					</LabelBtnsetting>
 				</div>

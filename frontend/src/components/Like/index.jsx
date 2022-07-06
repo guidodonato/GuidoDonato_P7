@@ -1,4 +1,4 @@
-
+/** @format */
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as heartRegular } from "@fortawesome/free-regular-svg-icons";
@@ -25,7 +25,7 @@ export default function Likes({ id, likes, usersLiked }) {
 			headers: {
 				"Content-Type": "application/json",
 
-				Authorization: `beare ${usertoken}`,
+				Authorization: `bearer ${usertoken}`,
 			},
 			body: JSON.stringify({
 				like,
@@ -70,12 +70,12 @@ export default function Likes({ id, likes, usersLiked }) {
 
 	return (
 		<DivcontainerLike>
-			<LikeLabel hidden={isliked} onClick={handleClick}>
-				<Btnlike type='button' name='likes' />
+			<LikeLabel hidden={isliked} onClick={handleClick} >
+				<Btnlike type='button' name='notlike'  aria-label='like' />
 				<FontAwesomeIcon icon={heartRegular} />
 			</LikeLabel>
-			<LikeLabel hidden={!isliked} onClick={handleClick}>
-				<Btnlike type='button' name='likes' />
+			<LikeLabel hidden={!isliked} onClick={handleClick} >
+				<Btnlike type='button' name='likes' aria-label='like' />
 				<FontAwesomeIcon icon={heartSolid} />
 			</LikeLabel>
 			<DivQtalike>{likes}</DivQtalike>
