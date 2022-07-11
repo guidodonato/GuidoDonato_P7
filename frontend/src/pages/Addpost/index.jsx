@@ -1,162 +1,169 @@
-import { useState, useEffect, useContext } from 'react'
-import { AuthContext } from '../../utils/context'
-import { useMediaQuery } from 'react-responsive'
+/** @format */
+
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../utils/context";
+import { useMediaQuery } from "react-responsive";
 import {
-    DivUpload,
-    DivUploadimg,
-    CommentsText,
-    BtnUpload,
-    FormUpload,
-    BtnUploadImg,
-    UploadLabel,
-    UploaderImg,
-    MDivUpload,
-} from '../../utils/style/Grupomania'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUpload } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom'
+	DivUpload,
+	DivUploadimg,
+	CommentsText,
+	BtnUpload,
+	FormUpload,
+	BtnUploadImg,
+	UploadLabel,
+	UploaderImg,
+	MDivUpload,
+} from "../../utils/style/Grupomania";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 function UploadImagUrl({ imagenUrl, handleUploadimg }) {
-    if (imagenUrl) {
-        return <UploaderImg src={imagenUrl} alt="gruopomania" />
-    } else {
-        return (
-            <UploadLabel aria-hidden="true">
-                <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
-                <span>Upload image</span>
-                <BtnUploadImg
-                    required
-                    type="file"
-                    accept="image/*"
-                    name="imagen"
-                    onChange={handleUploadimg}
-                />
-            </UploadLabel>
-        )
-    }
+	if (imagenUrl) {
+		return <UploaderImg src={imagenUrl} alt='gruopomania' />;
+	} else {
+		return (
+			<UploadLabel aria-hidden='true'>
+				<FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
+				<span>Upload image</span>
+				<BtnUploadImg
+					required
+					type='file'
+					accept='image/*'
+					name='imagen'
+					onChange={handleUploadimg}
+				/>
+			</UploadLabel>
+		);
+	}
 }
 
 function Addpost() {
-    const ismobile = useMediaQuery({ maxWidth: 767 })
-    const { name, userID, usertoken, islogged } = useContext(AuthContext)
-    const [postsed, setIsposted] = useState(false)
-    const [imagenUrl, setImagenUrl] = useState(null)
-    const [file, setFile] = useState()
-    const [comments, setComments] = useState()
-    const navigate = useNavigate()
-    const formdata = new FormData()
-    useEffect(() => {
-        document.title = 'Addposts'
-        console.log(name)
-	},[])
-    async function handleUploadimg(e) {
-        setFile(e.target.files[0])
+	const ismobile = useMediaQuery({ maxWidth: 767 });
+	const { name, userID, usertoken, islogged } = useContext(AuthContext);
+	const [postsed, setIsposted] = useState(false);
+	const [imagenUrl, setImagenUrl] = useState(null);
+	const [file, setFile] = useState();
+	const [comments, setComments] = useState();
+	const navigate = useNavigate();
+	const formdata = new FormData();
+	useEffect(() => {
+		document.title = "Addposts";
+		console.log(name);
+	}, []);
+	async function handleUploadimg(e) {
+		setFile(e.target.files[0]);
 
-        console.log({ imagenUrl })
-    }
-    useEffect(() => {
-        if (file) {
-            const fileReader = new FileReader()
-            fileReader.readAsDataURL(file)
-            fileReader.onloadend = () => {
-                setImagenUrl(fileReader.result)
-            }
-        }
-    }, [file])
+		console.log({ imagenUrl });
+	}
+	useEffect(() => {
+		if (file) {
+			const fileReader = new FileReader();
+			fileReader.readAsDataURL(file);
+			fileReader.onloadend = () => {
+				setImagenUrl(fileReader.result);
+			};
+		}
+	}, [file]);
 
-    async function handleSubmit(e) {
-        e.preventDefault()
-        console.log(userID, name)
-        formdata.append('userId', userID)
-        formdata.append('name', name)
-        formdata.append('comments', comments)
-        formdata.append('imageUrl', file)
+	async function handleSubmit(e) {
+		e.preventDefault();
+		console.log(userID, name);
+		formdata.append("userId", userID);
+		formdata.append("name", name);
+		formdata.append("comments", comments);
+		formdata.append("imageUrl", file);
 
-        fetchnewposts()
-    }
-    async function fetchnewposts() {
-        fetch('http://localhost:4000/api/posts', {
-            method: 'POST',
-            headers: {
-                Authorization: `bearer ${usertoken}`,
-            },
-            body: formdata,
-        })
-            .then((res) => res.json())
+		fetchnewposts();
+	}
+	async function fetchnewposts() {
+		fetch("http://localhost:4000/api/posts", {
+			method: "POST",
+			headers: {
+				Authorization: `bearer ${usertoken}`,
+			},
+			body: formdata,
+		})
+			.then((res) => res.json())
 
-            .then((data) => {
-                console.log(data)
-                setIsposted(true)
-            })
-            .catch((err) => console.log(err))
-        setFile(null)
-    }
+			.then((data) => {
+				console.log(data);
+				setIsposted(true);
+			})
+			.catch((err) => console.log(err));
+		setFile(null);
+	}
 
-    useEffect(() => {
-        console.log({ imagenUrl })
-        if (postsed) {
-            setFile(null)
-            navigate('/Posts')
-        }
+	useEffect(() => {
+		console.log({ imagenUrl });
+		if (postsed) {
+			setFile(null);
+			navigate("/Posts");
+		}
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [postsed, imagenUrl])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [postsed, imagenUrl]);
 
-    useEffect(() => {
-        if (usertoken) {
-            console.log(islogged)
-        } else {
-            alert('no autorizado')
-            //navigate('/')
-        }
+	useEffect(() => {
+		if (usertoken) {
+			console.log(islogged);
+		} else {
+			alert("no autorizado");
+			//navigate('/')
+		}
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [usertoken])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [usertoken]);
 
-    return ismobile ? (
-        <MDivUpload >
-            <FormUpload onSubmit={handleSubmit} >
-                <DivUploadimg>
-                    <UploadImagUrl
-                        imagenUrl={imagenUrl}
-                        handleUploadimg={handleUploadimg}
-                        required
-                    />
-                </DivUploadimg>
-               
-                    
-                <CommentsText
-                    name="comments"
-                    required
-                    maxLength="35"
-                    placeholder="comments"
-                    onChange={(e) => setComments(e.target.value)}
-                />
-                <BtnUpload type="submit" value="Post" />
-            </FormUpload>
-        </MDivUpload>
-    ) : (
-        <DivUpload>
-            <FormUpload onSubmit={handleSubmit}>
-                <DivUploadimg>
-                    <UploadImagUrl
-                        imagenUrl={imagenUrl}
-                        handleUploadimg={handleUploadimg}
-                        required
-                    />
-                </DivUploadimg>
+	return ismobile ? (
+		<MDivUpload>
+			<FormUpload onSubmit={handleSubmit}>
+				<DivUploadimg>
+					<UploadImagUrl
+						imagenUrl={imagenUrl}
+						handleUploadimg={handleUploadimg}
+						required
+					/>
+				</DivUploadimg>
 
-                <CommentsText
-                    name="comments"
-                    required
-                    maxLength="35"
-                    placeholder="comments"
-                    onChange={(e) => setComments(e.target.value)}
-                />
-                <BtnUpload type="submit" value="Post" />
-            </FormUpload>
-        </DivUpload>
-    )
+				<CommentsText
+					arial-hidden='true'
+					id='commentpost'
+					name='comments'
+					required
+					maxLength='35'
+					placeholder='comments'
+					onChange={(e) => setComments(e.target.value)}
+				/>
+
+				<BtnUpload type='submit' value='Post' />
+			</FormUpload>
+		</MDivUpload>
+	) : (
+		<DivUpload>
+			<FormUpload onSubmit={handleSubmit}>
+				<DivUploadimg>
+					<UploadImagUrl
+						imagenUrl={imagenUrl}
+						handleUploadimg={handleUploadimg}
+						required
+					/>
+				</DivUploadimg>
+				<label for='commentpost'>
+					comments
+					<CommentsText
+						id='commentpost'
+						name='comments'
+						required
+						maxLength='35'
+						placeholder='comments'
+						onChange={(e) => setComments(e.target.value)}
+					/>
+				</label>
+				<BtnUpload type='submit' value='Post' />
+			</FormUpload>
+		</DivUpload>
+	);
 }
 
-export default Addpost
+export default Addpost;

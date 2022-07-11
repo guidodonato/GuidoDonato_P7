@@ -1,3 +1,5 @@
+/** @format */
+
 import PropTypes from "prop-types";
 import Avatar from "../Avatar";
 import Like from "../Like";
@@ -66,7 +68,6 @@ Listposts.propTypes = {
 	id: PropTypes.string.isRequired,
 	comments: PropTypes.string.isRequired,
 	imagen: PropTypes.string.isRequired,
-	created: PropTypes.string.isRequired,
 	userId: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	likes: PropTypes.number.isRequired,

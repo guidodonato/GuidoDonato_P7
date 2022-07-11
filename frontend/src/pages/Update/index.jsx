@@ -1,10 +1,9 @@
 /** @format */
 
 import { useState, useEffect, useContext } from "react";
-import { useMediaQuery } from "react-responsive";
+
 import { AuthContext, UpdateContext } from "../../utils/context";
 import {
-	DivUpload,
 	DivUploadimg,
 	CommentsText,
 	BtnUpload,
@@ -12,7 +11,6 @@ import {
 	BtnUploadImg,
 	MDivUpload,
 	UploadLabel,
-	UploaderImg,
 	UpdateloaderImg,
 } from "../../utils/style/Grupomania";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,38 +18,34 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 function UploadImagUrl({ imagenUrl, handleUploadimg }) {
-	if (!imagenUrl) {
-		return <UploaderImg src={imagenUrl} alt='gruopomania' />;
-	} else {
-		return (
-			<div>
-				<UploadLabel>
-					<FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
-					<span>Upload image</span>
-					<BtnUploadImg
-						type='file'
-						accept='image/*'
-						name='imagen'
-						onChange={handleUploadimg}
-					/>
-				</UploadLabel>
-				<UpdateloaderImg src={imagenUrl} alt='gruopomania' />
-			</div>
-		);
-	}
+	return (
+		<div>
+			<UploadLabel>
+				<FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
+				<span>Upload image</span>
+				<BtnUploadImg
+					type='file'
+					accept='image/*'
+					name='imagen'
+					onChange={handleUploadimg}
+				/>
+			</UploadLabel>
+			<UpdateloaderImg src={imagenUrl} alt='gruopomania' />
+		</div>
+	);
 }
 
 function Updatepost() {
-	const ismobile = useMediaQuery({ maxWidth: 767 });
 	const { name, userID, usertoken, islogged } = useContext(AuthContext);
 	const { idposts } = useContext(UpdateContext);
 	const [postsed, setIsposted] = useState(false);
-	const [allpost, setAllpost] = useState({});
+	const [allpost, setAllpost] = useState([]);
 	const [imagenUrl, setImagenUrl] = useState(null);
 	const [file, setFile] = useState();
 	const [comments, setComments] = useState();
 	const navigate = useNavigate();
 	const formdata = new FormData();
+
 	useEffect(() => {
 		document.title = "Update-post";
 		fetchonepots();
@@ -100,8 +94,8 @@ function Updatepost() {
 			.then((res) => res.json())
 
 			.then((data) => {
-				console.log(data);
 				setAllpost(data);
+				setComments(data.comments);
 				setImagenUrl(data.imageUrl);
 			})
 			.catch((err) => console.log(err));
@@ -117,8 +111,7 @@ function Updatepost() {
 		})
 			.then((res) => res.json())
 
-			.then((data) => {
-				console.log(data);
+			.then(() => {
 				setIsposted(true);
 			})
 			.catch((err) => console.log(err));
@@ -136,7 +129,7 @@ function Updatepost() {
 
 	useEffect(() => {
 		if (islogged) {
-			console.log(islogged);
+			console.log(allpost.comments);
 		} else {
 			navigate("/");
 		}
@@ -144,28 +137,8 @@ function Updatepost() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [islogged]);
 
-	return ismobile ? (
+	return (
 		<MDivUpload>
-			<FormUpload onSubmit={handleSubmit}>
-				<DivUploadimg>
-					<UploadImagUrl
-						imageUrl={allpost.imageUrl}
-						handleUploadimg={handleUploadimg}
-					/>
-				</DivUploadimg>
-
-				<CommentsText
-					name='comments'
-					required
-					maxLength='35'
-					placeholder={allpost.comments}
-					onChange={(e) => setComments(e.target.value)}
-				/>
-				<BtnUpload type='submit' value='Post' />
-			</FormUpload>
-		</MDivUpload>
-	) : (
-		<DivUpload>
 			<FormUpload onSubmit={handleSubmit}>
 				<DivUploadimg>
 					<UploadImagUrl
@@ -174,16 +147,19 @@ function Updatepost() {
 					/>
 				</DivUploadimg>
 
-				<CommentsText
-					name='comments'
-					required
-					maxLength='35'
-					placeholder={allpost.comments}
-					onChange={(e) => setComments(e.target.value)}
-				/>
+				<label htmlFor="comment">
+					<CommentsText
+						id='comment'
+						name='comments'
+						required
+						maxLength='35'
+						onChange={(e) => setComments(e.target.value)}
+						value={comments}
+					></CommentsText>
+				</label>
 				<BtnUpload type='submit' value='Post' />
 			</FormUpload>
-		</DivUpload>
+		</MDivUpload>
 	);
 }
 export default Updatepost;

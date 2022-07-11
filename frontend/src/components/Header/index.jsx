@@ -29,10 +29,11 @@ function Header() {
 		localStorage.removeItem("userID");
 		localStorage.removeItem("Roles");
 		localStorage.removeItem("Name");
+		localStorage.removeItem("idpots");
 		AuthCtx.setUsertoken("");
 		AuthCtx.setIslogged(false);
 		AuthCtx.setuserId("");
-		AuthCtx.setRoles("")
+		AuthCtx.setRoles("");
 	}
 	if (usertoken) {
 		AuthCtx.setIslogged(true);
