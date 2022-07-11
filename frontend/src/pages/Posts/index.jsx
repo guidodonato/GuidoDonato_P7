@@ -24,8 +24,7 @@ import { Loader } from "../../components/Loading/index";
 
 function Post() {
 	const navigate = useNavigate();
-	const {AuthCtx} = useContext(AuthContext)
-	const { usertoken, userID, Roles, name} = useContext(AuthContext);
+	const { usertoken, userID, Roles, name } = useContext(AuthContext);
 	const [posts, setPosts] = useState([]);
 	const [postsACT, setPostsAct] = useState([]);
 	const { setDposts, Dposts } = useContext(DeleteContext);
@@ -35,15 +34,13 @@ function Post() {
 	const isMobile = useMediaQuery({ maxWidth: 767 });
 	const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
 	const [isloading, setIsloading] = useState(false);
-	
+
 	const [empty, setEmpty] = useState(false);
 
 	useEffect(() => {
-		document.title = 'Posts'
-	
-		
-	},[])
-	
+		document.title = "Posts";
+	}, []);
+
 	async function fetchposts() {
 		await fetch("http://localhost:4000/api/posts", {
 			headers: new Headers({
@@ -52,7 +49,6 @@ function Post() {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				setPosts(data);
 			})
 
@@ -62,12 +58,11 @@ function Post() {
 	}
 
 	useEffect(() => {
-		localStorage.setItem("Roles", Roles)
-		localStorage.setItem("userID", userID)
-		localStorage.setItem("Name", name)
+		localStorage.setItem("userID", userID);
+		localStorage.setItem("Name", name);
 		setIsloading(true);
 		usertoken ? fetchposts() : navigate("/");
-		
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [usertoken]);
 

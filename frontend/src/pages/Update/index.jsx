@@ -54,8 +54,6 @@ function Updatepost() {
 
 	async function handleUploadimg(e) {
 		setFile(e.target.files[0]);
-
-		console.log({ imagenUrl });
 	}
 
 	useEffect(() => {
@@ -71,7 +69,6 @@ function Updatepost() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 
-		console.log(userID, name);
 		if (allpost.comments !== comments) {
 			formdata.append("comments", comments);
 		} else {
@@ -127,16 +124,6 @@ function Updatepost() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [postsed]);
 
-	useEffect(() => {
-		if (islogged) {
-			console.log(allpost.comments);
-		} else {
-			navigate("/");
-		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [islogged]);
-
 	return (
 		<MDivUpload>
 			<FormUpload onSubmit={handleSubmit}>
@@ -147,7 +134,7 @@ function Updatepost() {
 					/>
 				</DivUploadimg>
 
-				<label htmlFor="comment">
+				<label htmlFor='comment'>
 					<CommentsText
 						id='comment'
 						name='comments'

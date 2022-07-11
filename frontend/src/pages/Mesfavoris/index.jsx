@@ -46,7 +46,7 @@ function Myfavorites() {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
+				
 				setPosts(data);
 			})
 
@@ -55,19 +55,19 @@ function Myfavorites() {
 		setIsloading(false);
 	}
 
-	const liked = posts.filter((post) => post.usersLiked.includes(userID));
+
 
 	useEffect(() => {
 		setIsloading(true);
 		islogged ? fetchposts() : navigate("/");
-		console.log(islogged);
+	
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [islogged]);
 
 	useEffect(() => {
 		if (postsACT) {
-			console.log(liked);
+			
 			setNext(
 				posts
 					.filter((post) => post.usersLiked.includes(userID))

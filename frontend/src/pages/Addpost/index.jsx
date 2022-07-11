@@ -49,12 +49,9 @@ function Addpost() {
 	const formdata = new FormData();
 	useEffect(() => {
 		document.title = "Addposts";
-		console.log(name);
 	}, []);
 	async function handleUploadimg(e) {
 		setFile(e.target.files[0]);
-
-		console.log({ imagenUrl });
 	}
 	useEffect(() => {
 		if (file) {
@@ -68,7 +65,7 @@ function Addpost() {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		console.log(userID, name);
+
 		formdata.append("userId", userID);
 		formdata.append("name", name);
 		formdata.append("comments", comments);
@@ -87,7 +84,6 @@ function Addpost() {
 			.then((res) => res.json())
 
 			.then((data) => {
-				console.log(data);
 				setIsposted(true);
 			})
 			.catch((err) => console.log(err));
@@ -95,7 +91,6 @@ function Addpost() {
 	}
 
 	useEffect(() => {
-		console.log({ imagenUrl });
 		if (postsed) {
 			setFile(null);
 			navigate("/Posts");
@@ -103,17 +98,6 @@ function Addpost() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [postsed, imagenUrl]);
-
-	useEffect(() => {
-		if (usertoken) {
-			console.log(islogged);
-		} else {
-			alert("no autorizado");
-			//navigate('/')
-		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [usertoken]);
 
 	return ismobile ? (
 		<MDivUpload>
@@ -149,7 +133,7 @@ function Addpost() {
 						required
 					/>
 				</DivUploadimg>
-				<label for='commentpost'>
+				<label htmlFor='commentpost'>
 					comments
 					<CommentsText
 						id='commentpost'

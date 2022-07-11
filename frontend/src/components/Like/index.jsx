@@ -35,7 +35,6 @@ export default function Likes({ id, likes, usersLiked }) {
 			.then((res) => res.json())
 			.then((data) => {
 				setLikedposts(true);
-				console.log(data);
 			})
 			.catch((err) => console.log());
 	}
@@ -51,9 +50,6 @@ export default function Likes({ id, likes, usersLiked }) {
 			setLike(0);
 			fetchlike();
 		}
-
-		console.log(like);
-		console.log(usersLiked);
 	}
 
 	/// pour indiquer si l'utilisateur a déjà like///
@@ -70,11 +66,11 @@ export default function Likes({ id, likes, usersLiked }) {
 
 	return (
 		<DivcontainerLike>
-			<LikeLabel hidden={isliked} onClick={handleClick} >
-				<Btnlike type='button' name='notlike'  aria-label='like' />
+			<LikeLabel hidden={isliked} onClick={handleClick}>
+				<Btnlike type='button' name='notlike' aria-label='like' />
 				<FontAwesomeIcon icon={heartRegular} />
 			</LikeLabel>
-			<LikeLabel hidden={!isliked} onClick={handleClick} >
+			<LikeLabel hidden={!isliked} onClick={handleClick}>
 				<Btnlike type='button' name='likes' aria-label='like' />
 				<FontAwesomeIcon icon={heartSolid} />
 			</LikeLabel>

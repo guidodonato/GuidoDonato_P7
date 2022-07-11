@@ -68,7 +68,7 @@ function Signup() {
 			.then((data) => {
 				setUsertoken(data.token);
 				AuthCtx.setUserID(data.userId);
-				AuthCtx.setRoles(data.roles);
+				localStorage.setItem("Roles", data.roles);
 			})
 			.catch((err) => console.log(err));
 	}
@@ -92,6 +92,7 @@ function Signup() {
 	useEffect(() => {
 		usertoken ? localStorage.setItem("token", usertoken) : console.log("error");
 		if (usertoken) {
+			AuthCtx.setIslogged(true);
 			navigate("/posts");
 		} else {
 			AuthCtx.setIslogged(false);

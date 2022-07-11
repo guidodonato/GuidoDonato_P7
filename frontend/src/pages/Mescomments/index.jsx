@@ -43,7 +43,7 @@ function Mycomments() {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
+               
                 setPosts(data)
             })
 
@@ -55,15 +55,15 @@ function Mycomments() {
     
     useEffect(() => {
         setIsloading(true)
-        console.log(posts)
-         islogged ? fetchposts() :// navigate('/')
-        console.log(islogged)
+       
+         islogged ? fetchposts() : navigate('/')
+        
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [islogged])
 
     useEffect(() => {
-        console.log(userID)
+        
         if (postsACT) {
             setNext(
                 posts

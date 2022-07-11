@@ -21,7 +21,7 @@ function Header() {
 	const isMobile = useMediaQuery({ maxWidth: 767 });
 	const isTablet = useMediaQuery({ manWidth: 768, maxWidth: 991 });
 
-	const { usertoken, islogged } = useContext(AuthContext);
+	const { islogged } = useContext(AuthContext);
 	const AuthCtx = useContext(AuthContext);
 
 	async function logout() {
@@ -34,9 +34,6 @@ function Header() {
 		AuthCtx.setIslogged(false);
 		AuthCtx.setuserId("");
 		AuthCtx.setRoles("");
-	}
-	if (usertoken) {
-		AuthCtx.setIslogged(true);
 	}
 
 	if (isMobile || isTablet) {
@@ -69,8 +66,8 @@ function Header() {
 				<ImgLogo src={Logo} alt='groupmania' />
 			</StyleLogo>
 			<NavLink>
-				<StyledLink hidden={islogged} to='/Singup' $isFullLink>
-					Singup
+				<StyledLink hidden={islogged} to='/Signup' $isFullLink>
+					Signup
 				</StyledLink>
 				<StyledLink hidden={islogged} to='/Login' $isFullLink>
 					Login
